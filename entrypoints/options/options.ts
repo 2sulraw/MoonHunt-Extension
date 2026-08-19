@@ -284,8 +284,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   $('copyPortBtn')?.addEventListener('click', () => navigator.clipboard.writeText(($('port') as HTMLInputElement).value || '6802'))
 
   // About: open the desktop app's GitHub repository
+  const readGithubUrl = (): string => {
+    const url = (document.getElementById('aboutGithubUrl') as HTMLSpanElement | null)?.textContent?.trim()
+    return url && /^https?:\/\//i.test(url) ? url : 'https://github.com/2sulraw/MoonHunt-DownloadManager'
+  }
   $('aboutGithubBtn')?.addEventListener('click', () => {
-    const url = 'https://github.com/2sulraw/MoonHunt-DownloadManager'
+    const url = readGithubUrl()
     try {
       chrome.tabs.create({ url })
     } catch {
