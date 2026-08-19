@@ -2,8 +2,7 @@
 
 A browser extension for **MoonHunt Download Manager**. It intercepts downloads
 in the browser and hands them to the MoonHunt desktop app, which takes over
-with its download engine — so files land through MoonHunt with full speed,
-session support, and no per-site configuration.
+with its download engine.
 
 Works on **Chromium** browsers (Chrome, Edge, Brave…) and **Firefox**, as a
 Manifest V3 extension on both.
@@ -17,9 +16,6 @@ Manifest V3 extension on both.
    filter pipeline, then forwards the URL plus captured headers to MoonHunt
    *before* the browser's own copy completes. The in-browser download is
    cancelled.
-3. **To the desktop.** MoonHunt downloads the file with those headers, so
-   authenticated, login-required, and redirect-based downloads work
-   automatically.
 
 Nothing is configured per-site. If the browser can start a download, the
 extension can forward it.
@@ -99,8 +95,7 @@ pnpm compile          # type-check (vue-tsc)
 
 ## Configuration
 
-Open **Settings** (via the popup or `chrome://extensions` → *Details* →
-Extension options):
+Open **Settings**:
 
 | Setting | What it does |
 | --- | --- |
