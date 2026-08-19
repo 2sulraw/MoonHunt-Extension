@@ -24,28 +24,6 @@ Manifest V3 extension on both.
 Nothing is configured per-site. If the browser can start a download, the
 extension can forward it.
 
-## Features
-
-- **Intercepts downloads from any site** — no provider list to maintain
-- **Authenticated downloads just work** — cookies / referer / user-agent are
-  forwarded, so files behind a login or a redirect host download in MoonHunt
-- **Context-menu action** — “Download with MoonHunt” on links, images and media
-- **True filenames** — Chromium reports the real filename (Content-Disposition
-  applied) via `downloads.onDeterminingFilename`; Firefox falls back gracefully
-- **Two interception paths** — Chrome MV3: blocking `webRequest` +
-  `onDeterminingFilename`; Firefox MV3: blocking `webRequest` only
-- **Filters** — optional file-extension rules and minimum-size rules let you
-  keep the browser's downloads for small files or specific types
-- **Optional cookie sharing for yt-dlp** — exported YouTube/Google cookies let
-  MoonHunt's yt-dlp handle signed-in or age-restricted video (off by default)
-- **Hides the browser's own download bar** — optional Chrome `downloads.ui`
-  toggle keeps the tray from flashing on every intercepted download
-- **Apps wake on demand** — a `moonhunt://` deep link launches the desktop app
-  if it's closed, then waits for it to come online
-- **Translated** — English, Persian, Spanish, Portuguese, Russian, Japanese,
-  Chinese, and Arabic (RTL-aware)
-- **Localization + theming** — the popup and options page mirror the desktop
-  app's dark/light look
 
 ## Privacy
 
@@ -63,22 +41,34 @@ cookies — is sent only to the MoonHunt desktop app running on the same machine
   it forwards downloads to the running app
 - **Node.js ≥ 24** and **pnpm ≥ 10** for building
 
-## Install (load unpacked)
+## Install
+
+> **Note:** the zip already contains the built extension — the Build section
+> below is only for developers who want to build from source.
 
 ### Chromium (Chrome / Edge)
 
-1. Build the extension (below) or download a packaged `.zip`.
-2. Open `chrome://extensions` and enable **Developer mode**.
-3. Click **Load unpacked** and select the `chromium-mv3` output folder.
+1. Download the **Chromium zip** from the latest [release]. If you use Chrome,
+   you can drag it straight into `chrome://extensions` and skip steps 2–3.
+2. Otherwise, extract the zip and open `chrome://extensions` and enable
+   **Developer mode**.
+3. Click **Load unpacked** and select the extracted folder (the one containing
+   `manifest.json`).
 4. Open the extension's options and enable **Intercept Downloads**.
 
 ### Firefox
 
-1. Build the Firefox build (below) or use the release `.zip`.
+1. Download the **Firefox zip** from the latest [release] (no extraction needed).
 2. Open `about:debugging` → **This Firefox** → **Load Temporary Add-on**.
-3. Select the built `manifest.json` (or the zip).
+3. Select the downloaded `.zip`.
 
-## Build
+> On Firefox, a temporary add-on only stays loaded for the current session. To
+> keep it permanently you'll need to [sign the extension] with Mozilla.
+
+[release]: https://github.com/2sulraw/moonhunt-extension/releases
+[sign the extension]: https://extensionworkshop.com/documentation/publish/package-your-extension/
+
+## Build (developers)
 
 ```bash
 pnpm install
