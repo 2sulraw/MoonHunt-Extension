@@ -62,11 +62,11 @@ cookies — is sent only to the MoonHunt desktop app running on the same machine
 2. Open `about:debugging` → **This Firefox** → **Load Temporary Add-on**.
 3. Select the downloaded `.zip`.
 
-> On Firefox, a temporary add-on only stays loaded for the current session. To
-> keep it permanently you'll need to [sign the extension] with Mozilla.
+> Loading via `about:debugging` only lasts for the current session. To keep the
+> extension permanently without signing it, set `xpinstall.signatures.required`
+> to `false` in `about:config`, then install the zip from the file.
 
 [release]: https://github.com/2sulraw/moonhunt-extension/releases
-[sign the extension]: https://extensionworkshop.com/documentation/publish/package-your-extension/
 
 ## Build (developers)
 
