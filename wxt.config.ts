@@ -1,7 +1,10 @@
 import { defineConfig, type WxtViteConfig } from 'wxt'
 import { resolve } from 'node:path'
+import { readFileSync } from 'node:fs'
 import { buildExtensionManifest } from './shared/manifest'
 import { localesPlugin } from './shared/i18n/locales-plugin'
+
+const { version } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string }
 
 export default defineConfig({
   modules: ['@wxt-dev/module-vue'],
@@ -11,7 +14,7 @@ export default defineConfig({
   },
   manifest: ({ browser }) => ({
     ...buildExtensionManifest(browser),
-    version: '0.0.1',
+    version,
   }),
   hooks: {
     'build:manifestGenerated': (_, manifest) => {
