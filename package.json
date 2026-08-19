@@ -1,0 +1,35 @@
+{
+  "name": "moonhunt-extension",
+  "description": "MoonHunt Download Manager browser extension",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.34.1",
+  "engines": {
+    "node": ">=24.16.0"
+  },
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox --mv3",
+    "build": "wxt build -b chromium",
+    "build:firefox": "wxt build -b firefox --mv3",
+    "zip": "wxt zip -b chromium",
+    "zip:firefox": "wxt zip -b firefox --mv3",
+    "test": "vitest run",
+    "compile": "vue-tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.2.6",
+    "@types/picomatch": "^4.0.3",
+    "@wxt-dev/module-vue": "^1.0.3",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11",
+    "vue-tsc": "^3.2.5",
+    "wxt": "^0.20.20"
+  },
+  "dependencies": {
+    "@fontsource/nunito": "^5.2.7",
+    "@material-design-icons/font": "^0.14.15",
+    "vue": "^3.5.29"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "ext_name": {
+    "message": "MoonHunt Download Manager",
+    "description": "Extension name"
+  },
+  "ext_description": {
+    "message": "Send downloads from your browser to MoonHunt's aria2-powered download manager",
+    "description": "Extension description"
+  }
+}

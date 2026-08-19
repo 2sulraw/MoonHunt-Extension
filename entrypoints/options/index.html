@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoonHunt Extension Settings</title>
+  <style>
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 400;
+      src: url('/fonts/nunito-latin-400-normal.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 500;
+      src: url('/fonts/nunito-latin-500-normal.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 600;
+      src: url('/fonts/nunito-latin-600-normal.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 700;
+      src: url('/fonts/nunito-latin-700-normal.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 800;
+      src: url('/fonts/nunito-latin-800-normal.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 400;
+      src: url('/fonts/Vazirmatn-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 500;
+      src: url('/fonts/Vazirmatn-Medium.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 600;
+      src: url('/fonts/Vazirmatn-SemiBold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 700;
+      src: url('/fonts/Vazirmatn-Bold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 800;
+      src: url('/fonts/Vazirmatn-ExtraBold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 900;
+      src: url('/fonts/Vazirmatn-Black.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Material Icons';
+      font-style: normal;
+      font-weight: 400;
+      src: url('/fonts/material-icons.woff2') format('woff2');
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1;
+      display: inline-block;
+      white-space: nowrap;
+      letter-spacing: normal;
+      text-transform: none;
+      direction: ltr;
+    }
+
+    /* ─── Theme tokens (mirror the desktop app) ─── */
+    body {
+      --accent: #4fc3f7;
+      --accent-rgb: 79, 195, 247;
+      --sidebar-width: 240px;
+      --bg-primary: #0a0e1a;
+      --bg-surface: #16162a;
+      --bg-card: #1e1e32;
+      --text: #ffffff;
+      --text-muted: #8c95b4;
+      --text-dim: #6b7a9a;
+      --border: rgba(255,255,255,0.06);
+      --border-strong: rgba(255,255,255,0.08);
+      --hover-bg: rgba(255,255,255,0.06);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.45);
+      background: var(--bg-primary);
+      color: var(--text);
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    html[lang='fa'] body,
+    html[lang='fa'] button,
+    html[lang='fa'] input,
+    html[lang='ar'] body,
+    html[lang='ar'] button,
+    html[lang='ar'] input {
+      font-family: 'Vazirmatn', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* Persian/Arabic sentences are RTL. Auto-detect each string's direction so
+       an embedded Latin word ("YouTube", "MoonHunt") stays in place instead of
+       jumping to the end — the page layout itself stays LTR. */
+    .field > label,
+    .field-hint,
+    .row-field label,
+    .section-title,
+    .section-sub,
+    .sidebar-item,
+    .sidebar-title,
+    input.nd-input,
+    .badge {
+      unicode-bidi: plaintext;
+      text-align: left;
+    }
+
+    body.light {
+      --bg-primary: #faf6f0;
+      --bg-surface: #f5f0ea;
+      --bg-card: #fefcf8;
+      --text: #2c2417;
+      --text-muted: #7f6e5c;
+      --text-dim: #a89783;
+      --border: rgba(80,50,30,0.06);
+      --border-strong: rgba(80,50,30,0.10);
+      --hover-bg: rgba(80,50,30,0.03);
+    }
+
+    body.linear-dark {
+      --bg-primary: #08090a;
+      --bg-surface: #0f1011;
+      --bg-card: #191a1b;
+      --text: #f7f8f8;
+      --text-muted: #d0d6e0;
+      --text-dim: #62666d;
+      --border: rgba(255,255,255,0.06);
+      --border-strong: rgba(255,255,255,0.08);
+      --hover-bg: rgba(255,255,255,0.04);
+      --accent: #5e6ad2;
+      --accent-rgb: 94, 106, 210;
+    }
+
+    /* ─── Layout (mirror app settings) ─── */
+    .settings-layout { display: flex; min-height: 100vh; }
+
+    /* ─── Sidebar (mirror app) ─── */
+    .settings-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width, 240px);
+      height: 100vh;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10;
+    }
+    .sidebar-header { padding: 20px 16px 16px; }
+    .sidebar-header-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .sidebar-title { margin: 0; font-size: 16px; font-weight: 700; color: var(--text); }
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: var(--bg-primary);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .badge.connected { background: #34c759; color: #fff; }
+    .badge.rejected { background: #ef5350; color: #fff; }
+    .badge.disconnected { color: var(--text-dim); background: transparent; }
+    .app-status-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+    .app-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      flex-shrink: 0;
+    }
+    .app-status-card.open .app-status-dot { background: #34c759; box-shadow: 0 0 6px rgba(52, 199, 89, 0.6); }
+    .app-status-card.closed .app-status-dot { background: #ef5350; box-shadow: 0 0 6px rgba(239, 83, 80, 0.6); }
+    .app-status-card.unauthorized .app-status-dot { background: #ffb020; box-shadow: 0 0 6px rgba(255, 176, 32, 0.6); }
+    .app-status-text { font-size: 13px; font-weight: 600; color: var(--text); }
+    .sidebar-nav { flex: 1; overflow-y: auto; padding: 8px 12px; }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+    }
+    .sidebar-item:hover { background: var(--hover-bg); color: var(--text); }
+    .sidebar-item.active { background: rgba(var(--accent-rgb), 0.1); color: var(--accent); font-weight: 600; }
+    .sidebar-item i { font-size: 20px; width: 22px; text-align: center; flex-shrink: 0; }
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sidebar-save-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #0a0e1a;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+    .sidebar-save-btn:hover { opacity: 0.9; }
+
+    /* ─── Content (mirror app) ─── */
+    .settings-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px 32px;
+      margin-left: var(--sidebar-width, 240px);
+    }
+    .settings-section {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .settings-section:last-child { border-bottom: none; }
+    .settings-section { display: none; }
+    .settings-section.active { display: block; animation: sectionIn 0.25s ease; }
+    @keyframes sectionIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section-title { margin: 0 0 4px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .section-divider { height: 1px; background: var(--border); margin: 20px 0; }
+    .section-sub { margin: 0 0 20px; color: var(--text-dim); font-size: 13px; }
+
+    /* ─── Fields (mirror app) ─── */
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+    .field > label {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+    .field-hint { display: block; margin-top: 6px; color: var(--text-dim); font-size: 11px; line-height: 1.4; }
+
+    .row-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+    }
+    .row-field + .row-field { border-top: 1px solid var(--border); }
+    .row-field > div:first-child { min-width: 0; }
+    .row-field label { margin-bottom: 0; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--text); text-transform: none; letter-spacing: normal; }
+    .row-field .field-hint { margin-top: 2px; }
+
+    .optional { font-weight: 400; font-size: 11px; }
+
+    /* ─── Inputs (mirror app nd-input) ─── */
+    .nd-input-wrap { position: relative; display: flex; align-items: center; }
+    input.nd-input {
+      width: 100%;
+      height: 36px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+    input.nd-input:hover { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.035); }
+    input.nd-input:focus { border-color: var(--accent); background: rgba(var(--accent-rgb), 0.03); }
+    input.nd-input::placeholder { color: var(--text-dim); opacity: 0.55; }
+    input.nd-path-input { padding-right: 36px; }
+    input.nd-input:-webkit-autofill,
+    input.nd-input:-webkit-autofill:hover,
+    input.nd-input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.025) inset;
+      -webkit-text-fill-color: var(--text);
+      transition: background-color 9999s ease-in-out 0s;
+    }
+    .nd-input-action {
+      position: absolute;
+      right: 10px;
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      transition: all 0.15s ease;
+    }
+    .nd-input-action i { font-size: 18px; }
+    .nd-input-action:hover { background: rgba(var(--accent-rgb), 0.1); color: var(--accent); }
+    .nd-input-wrap--token input.nd-input { padding-right: 72px; }
+    .nd-hide-btn { right: 42px; }
+
+    /* ─── Toggle (mirror app) ─── */
+    .toggle {
+      width: 42px;
+      height: 24px;
+      border-radius: 12px;
+      background: var(--hover-bg);
+      border: 1px solid var(--border-strong);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .toggle.active { background: rgba(var(--accent-rgb), 0.25); border-color: rgba(var(--accent-rgb), 0.4); }
+    .toggle-track {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), background 0.25s ease;
+    }
+    .toggle.active .toggle-track { transform: translateX(18px); background: var(--accent); }
+
+    /* ─── Buttons (mirror app) ─── */
+    .actions { display: flex; gap: 8px; margin-top: 4px; }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn i { font-size: 18px; }
+    .btn-ghost { background: var(--hover-bg); color: var(--text); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+    .btn-primary { background: var(--accent); color: #0a0e1a; }
+    .btn-primary:hover { opacity: 0.9; }
+
+    .btn-auto {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: #0a0e1a;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-auto:hover { opacity: 0.9; }
+
+    /* ─── Status (mirror app) ─── */
+    .status {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .status.show { display: flex; animation: sectionIn 0.2s ease; }
+    .status.success { background: rgba(52,199,89,0.08); color: #34c759; border: 1px solid rgba(52,199,89,0.15); }
+    .status.error { background: rgba(239,83,80,0.08); color: #ef5350; border: 1px solid rgba(239,83,80,0.15); }
+
+    /* ─── Language (mirror app) ─── */
+    .language-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 14px; }
+    .language-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      height: 56px;
+      min-height: 56px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.02);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .language-card:hover { border-color: rgba(var(--accent-rgb), 0.35); background: var(--hover-bg); transform: translateY(-2px); }
+    .language-card.active { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.15); }
+    .language-card .language-flag { flex: none; width: 28px; height: 21px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); overflow: hidden; }
+    .language-card .language-name { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .language-card .language-check { position: absolute; top: 8px; right: 8px; font-size: 18px; color: var(--accent); display: none; }
+    .language-card.active .language-check { display: inline-flex; }
+
+    /* ─── Theme (mirror app) ─── */
+    .theme-selector { display: flex; gap: 10px; margin-top: 14px; }
+    .theme-card {
+      flex: 1;
+      padding: 18px 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-card);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dim);
+      font-family: inherit;
+    }
+    .theme-card:hover { border-color: rgba(var(--accent-rgb), 0.2); }
+    .theme-card.active { border-color: var(--accent); color: var(--text); box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.15); }
+    .theme-card .swatch { width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: transform 0.15s ease; }
+    .theme-card.active .swatch { transform: scale(1.08); }
+    .theme-card[data-theme="dark"] .swatch { background: linear-gradient(135deg, #4fc3f7, #2ab7ff); }
+    .theme-card[data-theme="light"] .swatch { background: linear-gradient(135deg, #ff9f43, #f368e0); }
+    .theme-card[data-theme="linear-dark"] .swatch { background: linear-gradient(135deg, #5e6ad2, #8593f0); }
+    .theme-card-label { display: block; margin-top: 6px; }
+    .theme-card-check { display: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); margin: 8px auto 0; align-items: center; justify-content: center; }
+    .theme-card.active .theme-card-check { display: inline-flex; }
+    .theme-card-check i { font-size: 10px; color: #0a0e1a; font-weight: 700; }
+
+    /* ─── About modal (mirrors the desktop app) ─── */
+    .about-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); }
+    .about-modal-overlay.open { display: flex; animation: aboutFade 0.18s ease; }
+    .about-modal { position: relative; width: min(400px, 90vw); max-height: 85vh; overflow-y: auto; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--border-strong); box-shadow: var(--shadow-lg); animation: aboutPop 0.2s ease; }
+    .about-modal-close { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; background: var(--hover-bg); border: none; border-radius: 6px; color: var(--text-dim); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s, color 0.15s; z-index: 1; }
+    .about-modal-close:hover { color: var(--text); }
+    .about-modal-close .material-icons { font-size: 16px; }
+    @keyframes aboutFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes aboutPop { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .ab-hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 28px 24px 16px; gap: 2px; }
+    .ab-logo-ring { width: 52px; height: 52px; border-radius: 50%; background: rgba(var(--accent-rgb), 0.08); border: 1.5px solid rgba(var(--accent-rgb), 0.20); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+    .ab-logo-ring .material-icons { font-size: 26px; color: var(--accent); }
+    .ab-name { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+    .ab-ver { font-size: 10px; color: var(--text-dim); background: var(--hover-bg); padding: 1px 8px; border-radius: 999px; border: 1px solid var(--border); margin-top: 3px; }
+    .ab-desc { color: var(--text-muted); font-size: 12.5px; line-height: 1.55; margin: 6px 0 0; max-width: 300px; }
+    .ab-tech { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; padding: 10px 24px 0; }
+    .ab-chip { padding: 3px 9px; border-radius: 5px; background: rgba(var(--accent-rgb), 0.06); color: var(--accent); font-size: 11px; font-weight: 600; border: 1px solid rgba(var(--accent-rgb), 0.10); }
+    .ab-github { padding: 12px 16px; }
+    .ab-github-card { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--hover-bg); border: 1px solid var(--border); color: inherit; font: inherit; text-align: start; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+    .ab-github-card:hover { background: rgba(var(--accent-rgb), 0.06); border-color: rgba(var(--accent-rgb), 0.28); }
+    .ab-github-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(var(--accent-rgb), 0.06); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
+    .ab-github-logo { width: 18px; height: 18px; fill: currentColor; }
+    .ab-github-text { min-width: 0; flex: 1; }
+    .ab-github-text strong { display: block; color: var(--text-muted); font-size: 12.5px; font-weight: 600; margin-bottom: 1px; }
+    .ab-github-url { color: var(--text-dim); font-size: 11.5px; line-height: 1.45; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ab-github-arrow { color: var(--text-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ab-github-arrow .material-icons { font-size: 16px; }
+    .ab-footer { padding: 12px 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 12px; text-align: center; }
+    .ab-footer strong { color: var(--text-muted); }
+    /* Hide the number-input stepper arrows on the port field. */
+    input#port::-webkit-outer-spin-button,
+    input#port::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input#port[type="number"] { -moz-appearance: textfield; }
+  </style>
+</head>
+<body>
+  <div class="settings-layout">
+    <aside class="settings-sidebar">
+      <div class="sidebar-header sidebar-header-row">
+        <h2 class="sidebar-title" data-i18n="Settings">Settings</h2>
+        <span class="badge" id="connBadge">● Checking…</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="sidebar-item active" data-section="general" data-i18n="General"><i class="material-icons">tune</i> General</button>
+        <button class="sidebar-item" data-section="appearance" data-i18n="Appearance"><i class="material-icons">palette</i> Appearance</button>
+        <button class="sidebar-item" id="aboutBtn" type="button" data-i18n="About" aria-haspopup="dialog"><i class="material-icons">info</i> About</button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="sidebar-save-btn btn-save" id="saveBtn" data-i18n="Save Changes"><i class="material-icons">check</i> Save Changes</button>
+      </div>
+    </aside>
+
+    <main class="settings-content">
+      <div id="status" class="status"></div>
+
+      <!-- ── General ── -->
+      <section class="settings-section active" id="section-general">
+        <div class="section-title" data-i18n="General">General</div>
+        <p class="section-sub" data-i18n="Connection and feature settings for the MoonHunt integration">Connection and feature settings for the MoonHunt integration</p>
+
+        <div class="section-divider"></div>
+
+        <h3 class="sidebar-title" style="font-size:13px; color: var(--text-muted);" data-i18n="Language">Language</h3>
+        <div class="language-cards" id="languageCards"></div>
+
+        <div class="section-divider"></div>
+
+        <h3 class="sidebar-title" style="font-size:13px; color: var(--text-muted);" data-i18n="Connection">Connection</h3>
+        <div style="margin-top:12px;">
+          <div class="field">
+            <label data-i18n="Host">Host</label>
+            <div class="nd-input-wrap">
+              <input type="text" id="host" class="nd-input" placeholder="127.0.0.1" />
+            </div>
+          </div>
+          <div class="field">
+            <label data-i18n="Port">Port</label>
+            <div class="nd-input-wrap">
+              <input type="number" id="port" class="nd-input nd-path-input" placeholder="6802" min="1" max="65535" />
+              <button class="nd-input-action" id="copyPortBtn" data-i18n-title="Copy port" title="Copy port"><i class="material-icons">content_copy</i></button>
+            </div>
+            <p class="field-hint" data-i18n="Leave at 6802; the extension auto-detects the app's extension port.">Leave at 6802; the extension auto-detects the app's extension port.</p>
+          </div>
+          <div class="field">
+            <label data-i18n="Auth Token">Auth Token</label>
+            <div class="nd-input-wrap nd-input-wrap--token">
+              <input type="text" id="authToken" class="nd-input" placeholder="Token" autocomplete="off" />
+              <button class="nd-input-action nd-hide-btn" id="hideAuthBtn" title="Hide"><i class="material-icons">visibility_off</i></button>
+              <button class="nd-input-action" id="copyAuthBtn" data-i18n-title="Copy token" title="Copy token"><i class="material-icons">content_copy</i></button>
+            </div>
+            <p class="field-hint" id="authHint" data-i18n="Require the same token set in the app so only your extension can connect.">Require the same token set in the app so only your extension can connect.</p>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <h3 class="sidebar-title" style="font-size:13px; color: var(--text-muted);" data-i18n="App Status">App Status</h3>
+          <div style="margin-top:12px;">
+            <div class="app-status-card" id="appStatusCard">
+              <span class="app-status-dot" id="appStatusDot"></span>
+              <span class="app-status-text" id="appStatusText" data-i18n="Checking…">Checking…</span>
+            </div>
+            <p class="field-hint" data-i18n="Shows whether the MoonHunt desktop app is running and reachable.">Shows whether the MoonHunt desktop app is running and reachable.</p>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <h3 class="sidebar-title" style="font-size:13px; color: var(--text-muted);" data-i18n="Features">Features</h3>
+          <div style="margin-top:12px;">
+            <div class="row-field">
+              <div>
+                <label for="toggleIntercept" data-i18n="Intercept Downloads">Intercept Downloads</label>
+                <div class="field-hint" data-i18n="Automatically capture download links from pages">Automatically capture download links from pages</div>
+              </div>
+              <div class="toggle active" id="toggleIntercept">
+                <div class="toggle-track" id="interceptTrack"><div class="thumb"></div></div>
+              </div>
+            </div>
+            <div class="row-field">
+              <div>
+                <label for="toggleCookies" data-i18n="Cookie Sharing">Cookie Sharing</label>
+                <div class="field-hint" data-i18n="Share YouTube session cookies with the desktop app">Share YouTube session cookies with the desktop app</div>
+              </div>
+              <div class="toggle" id="toggleCookies">
+                <div class="toggle-track" id="cookieTrack"><div class="thumb"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="testBtn" data-i18n="Test Connection">
+            <i class="material-icons">wifi</i>
+            Test Connection
+          </button>
+        </div>
+      </section>
+
+      <!-- ── Appearance ── -->
+      <section class="settings-section" id="section-appearance">
+        <div class="section-title" data-i18n="Appearance">Appearance</div>
+        <p class="section-sub" data-i18n="Theme and accent color for the extension popup">Theme and accent color for the extension popup</p>
+
+        <div class="section-divider"></div>
+
+        <h3 class="sidebar-title" style="font-size:13px; color: var(--text-muted);" data-i18n="Theme">Theme</h3>
+        <div class="theme-selector">
+          <div class="theme-card active" data-theme="dark" id="themeDark">
+            <div class="swatch"></div>
+            <span class="theme-card-label" data-i18n="Dark">Dark</span>
+            <span class="theme-card-check"><i class="material-icons">check</i></span>
+          </div>
+          <div class="theme-card" data-theme="light" id="themeLight">
+            <div class="swatch"></div>
+            <span class="theme-card-label" data-i18n="Light">Light</span>
+            <span class="theme-card-check"><i class="material-icons">check</i></span>
+          </div>
+          <div class="theme-card" data-theme="linear-dark" id="themeLinear">
+            <div class="swatch"></div>
+            <span class="theme-card-label" data-i18n="Linear">Linear</span>
+            <span class="theme-card-check"><i class="material-icons">check</i></span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- About modal (mirrors the desktop app's About modal) -->
+  <div class="about-modal-overlay" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+    <div class="about-modal">
+      <button type="button" class="about-modal-close" id="aboutCloseBtn" aria-label="Close"><i class="material-icons">close</i></button>
+      <div class="ab-hero">
+        <div class="ab-logo-ring"><i class="material-icons">nightlight_round</i></div>
+        <h2 class="ab-name" id="aboutModalTitle">MoonHunt</h2>
+        <span class="ab-ver">v0.1.0</span>
+        <p class="ab-desc" data-i18n="A polished desktop download manager built for speed, structure, and a calm experience.">A polished desktop download manager built for speed, structure, and a calm experience.</p>
+        <div class="ab-tech">
+          <span class="ab-chip">Tauri 2</span>
+          <span class="ab-chip">Vue 3</span>
+          <span class="ab-chip">TypeScript</span>
+          <span class="ab-chip">aria2</span>
+        </div>
+      </div>
+      <div class="ab-github">
+        <button type="button" class="ab-github-card" id="aboutGithubBtn">
+          <span class="ab-github-icon" aria-hidden="true">
+            <svg class="ab-github-logo" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+          </span>
+          <span class="ab-github-text">
+            <strong data-i18n="View on GitHub">View on GitHub</strong>
+            <span class="ab-github-url" dir="ltr">github.com/2sulraw/MoonHunt-DownloadManager</span>
+          </span>
+          <span class="ab-github-arrow"><i class="material-icons">open_in_new</i></span>
+        </button>
+      </div>
+      <div class="ab-footer" data-i18n="Built with care by">Built with care by <strong>werlos</strong></div>
+    </div>
+  </div>
+
+  <script type="module" src="./options.ts"></script>
+</body>
+</html>
