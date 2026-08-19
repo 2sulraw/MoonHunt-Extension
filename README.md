@@ -62,9 +62,18 @@ cookies — is sent only to the MoonHunt desktop app running on the same machine
 2. Open `about:debugging` → **This Firefox** → **Load Temporary Add-on**.
 3. Select the downloaded `.zip`.
 
-> Loading via `about:debugging` only lasts for the current session. To keep the
-> extension permanently without signing it, set `xpinstall.signatures.required`
-> to `false` in `about:config`, then install the zip from the file.
+> **Keep it installed permanently (unsigned):** Firefox normally refuses to
+> keep an unsigned add-on. To get around that for a local install:
+>
+> 1. Type `about:config` in the address bar and press **Enter**.
+>    Click **Accept the Risk and Continue** on the warning page.
+> 2. In the search box, type `xpinstall.signatures.required`.
+> 3. Click the **toggle** arrow on that row so the value turns `false`
+>    (or click the **+ Add** button → **Boolean** → name it
+>    `xpinstall.signatures.required` → set it to `false` if it doesn't exist).
+> 4. Open `about:addons` (press `Ctrl+Shift+A`), click the **gear** icon, and
+>    choose **Install Add-on From File…**, then pick the downloaded Firefox
+>    zip.
 
 [release]: https://github.com/2sulraw/moonhunt-extension/releases
 
