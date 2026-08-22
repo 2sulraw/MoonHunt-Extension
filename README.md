@@ -54,6 +54,11 @@ cookies — is sent only to the MoonHunt desktop app running on the same machine
 
 ### Firefox
 
+Install from [Firefox Add-ons (AMO)][amo] — the signed, official listing.
+It installs like any regular add-on and updates automatically.
+
+**Manual install** (from a release zip — temporary or unsigned):
+
 1. Download the **Firefox zip** from the latest [release] (no extraction needed).
 2. Open `about:debugging` → **This Firefox** → **Load Temporary Add-on**.
 3. Select the downloaded `.zip`.
@@ -72,6 +77,7 @@ cookies — is sent only to the MoonHunt desktop app running on the same machine
 >    zip.
 
 [release]: https://github.com/2sulraw/moonhunt-extension/releases
+[amo]: https://addons.mozilla.org/en-US/firefox/addon/moonhunt-download-manager/
 
 ## Build (developers)
 
